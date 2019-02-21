@@ -42,6 +42,47 @@
 (require 'init-exec-path) ;; Set up $PATH
 
 ;;----------------------------------------------------------------------------
+;; Python config
+;;----------------------------------------------------------------------------
+(global-linum-mode t) ;; enable line numbers globally
+
+(defvar myPackages
+  '(jedi
+    elpy
+    flycheck
+    py-autopep8))
+
+(mapcar (lambda (package) (unless (package-installed-p package)
+                       (package-install package)))
+        myPackages)
+
+(package-initialize)
+
+;; use jedi
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+(require 'use-package)
+(use-package python-mode
+  :init
+  (progn
+    (add-hook 'python-mode-hook 'jedi:setup)
+    (setq jedi:complete-on-dot t)
+    (setq py-electric-colon-active t))
+  :bind (("M-." . jedi:goto-definition)
+         ("M-," . jedi:goto-definition-pop-marker)
+         ("C-c d" . jedi:show-doc)
+         ("M-SPC" . jedi:complete)))
+
+;; use flycheck
+(require 'flycheck)
+(add-hook 'python-mode-hook 'flycheck-mode)
+
+;; enable autopep8 formatting on save
+;;(require 'py-autopep8)
+;;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+
+
+;;----------------------------------------------------------------------------
 ;; Allow users to provide an optional "init-preload-local.el"
 ;;----------------------------------------------------------------------------
 (require 'init-preload-local nil t)
