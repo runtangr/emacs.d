@@ -58,6 +58,9 @@
 
 (package-initialize)
 
+(when (executable-find "ipython")
+  (setq python-shell-interpreter "ipython"))
+
 ;; use jedi
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
@@ -68,7 +71,7 @@
     (add-hook 'python-mode-hook 'jedi:setup)
     (setq jedi:complete-on-dot t)
     (setq py-electric-colon-active t))
-  :bind (("M-." . jedi:goto-definition)
+  :bind (("M-." . jedi:goto-definition) ;; no use,use C-c .
          ("M-," . jedi:goto-definition-pop-marker)
          ("C-c d" . jedi:show-doc)
          ("M-SPC" . jedi:complete)))
@@ -81,7 +84,14 @@
 ;;(require 'py-autopep8)
 ;;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 
+;; direx
+(unless (package-installed-p 'direx)
+  (package-install 'direx))
+(require 'direx)
+(global-set-key (kbd "C-x C-j") 'direx:jump-to-directory)
 
+;; use emacsclient
+(server-start)
 ;;----------------------------------------------------------------------------
 ;; Allow users to provide an optional "init-preload-local.el"
 ;;----------------------------------------------------------------------------
@@ -250,3 +260,4 @@
 ;; End:
 ;;; init.el ends here
 (put 'erase-buffer 'disabled nil)
+(put 'scroll-left 'disabled nil)

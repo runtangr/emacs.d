@@ -11,7 +11,14 @@
   (after-load 'projectile
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
-  (maybe-require-package 'ibuffer-projectile))
+  (maybe-require-package 'ibuffer-projectile)
+
+  (require 'projectile)
+  (setq projectile-require-project-root nil)
+  (setq projectile-enable-caching t)
+  (setq projectile-globally-ignored-directories
+           (append '(".idea" ".git") projectile-globally-ignored-directories))
+)
 
 
 (provide 'init-projectile)
