@@ -92,6 +92,13 @@
 
 ;; use emacsclient
 (server-start)
+
+;; use treemacs
+(unless (package-installed-p 'treemacs)
+  (package-install 'treemacs))
+
+(unless (package-installed-p 'treemacs-projectile)
+  (package-install 'treemacs-projectile))
 ;;----------------------------------------------------------------------------
 ;; Allow users to provide an optional "init-preload-local.el"
 ;;----------------------------------------------------------------------------
