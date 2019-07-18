@@ -44,6 +44,10 @@
 ;;----------------------------------------------------------------------------
 ;; Python config
 ;;----------------------------------------------------------------------------
+;; 更改显示字体大小 16pt
+;; http://stackoverflow.com/questions/294664/how-to-set-the-font-size-in-emacs
+(set-face-attribute 'default nil :height 160)
+
 (global-linum-mode t) ;; enable line numbers globally
 
 (defvar myPackages
@@ -114,6 +118,7 @@
 
 (require 'init-frame-hooks)
 (require 'init-xterm)
+;; python themes
 (require 'init-themes)
 (require 'init-osx-keys)
 (require 'init-gui-frames)
