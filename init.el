@@ -49,7 +49,8 @@
 (set-face-attribute 'default nil :height 160)
 
 (global-linum-mode t) ;; enable line numbers globally
-
+;; ipython
+(setenv "IPY_TEST_SIMPLE_PROMPT" "1")
 (defvar myPackages
   '(jedi
     elpy
@@ -80,6 +81,7 @@
          ("C-c d" . jedi:show-doc)
          ("M-SPC" . jedi:complete)))
 
+(add-hook 'python-mode-hook 'elpy-mode)
 ;; use flycheck
 (require 'flycheck)
 (add-hook 'python-mode-hook 'flycheck-mode)
@@ -87,7 +89,6 @@
 ;; enable autopep8 formatting on save
 ;;(require 'py-autopep8)
 ;;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-
 ;; direx
 (unless (package-installed-p 'direx)
   (package-install 'direx))

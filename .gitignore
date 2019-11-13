@@ -52,3 +52,6 @@ site-lisp/package/
 /forge-database.sqlite
 .python-environments/
 projectile.cache
+ac-comphist.dat
+/transient
+/tutorial
